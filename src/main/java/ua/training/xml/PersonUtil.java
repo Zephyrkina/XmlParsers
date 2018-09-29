@@ -1,4 +1,6 @@
-package ua.training;
+package ua.training.xml;
+
+import ua.training.xml.Person;
 
 import java.util.List;
 import java.util.stream.Collectors;

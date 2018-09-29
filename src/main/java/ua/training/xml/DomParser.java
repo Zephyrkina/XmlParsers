@@ -1,4 +1,4 @@
-package ua.training;
+package ua.training.xml;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -13,15 +13,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class DomParser {
+public class DomParser implements Parser<Person> {
 
-    public void parseToConsole(File inputFile) {
+    public void parseToConsole(String inputFilePath) {
         try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(inputFile);
+            Document document = documentBuilder.parse(new File(inputFilePath));
 
             NodeList nList = document.getElementsByTagName("person");
 
@@ -68,13 +67,13 @@ public class DomParser {
 
 
     }
-    public List<Person> parseToCollection(File inputFile) {
+    public List<Person> parseToCollection(String inputFilePath) {
         List<Person> people = new ArrayList<Person>();
 
         try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(inputFile);
+            Document document = documentBuilder.parse(new File(inputFilePath));
 
             NodeList nList = document.getElementsByTagName("person");
 

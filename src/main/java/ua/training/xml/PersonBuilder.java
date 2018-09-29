@@ -1,4 +1,4 @@
-package ua.training;
+package ua.training.xml;
 
 public class PersonBuilder {
     private String id;
