@@ -1,73 +1,70 @@
 package ua.training;
 
-import ua.training.json.Currency;
-import ua.training.json.CurrencyUtil;
-import ua.training.json.GSONParser;
-import ua.training.xml.*;
+import ua.training.entity.Currency;
+import ua.training.entity.Person;
+import ua.training.parser.*;
+import ua.training.util.CurrencyUtil;
+import ua.training.util.PersonUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    //win
-        /* static String PATH_NAME_FOR_PEOPLE = "C:\\Users\\Valeriia_Voinalovych\\IdeaProjects\\xmlParsers2\\people.xml";
-        static String PATH_NAME_FOR_FILTERED_PEOPLE = "C:\\Users\\Valeriia_Voinalovych\\IdeaProjects\\xmlParsers2\\peopleWCashUpper10000.xml";*/
 
-    //mac
-    static String PATH_NAME_FOR_PEOPLE = "/Users/zephyrkina/IdeaProjects/XmlParsers/people.xml";
-    static String PATH_NAME_FOR_PEOPLE2 = "/Users/zephyrkina/IdeaProjects/XmlParsers/people2.xml";
+    /* static String PATH_NAME_FOR_PEOPLE = "C:\\Users\\Valeriia_Voinalovych\\IdeaProjects\\xmlParsers2\\people.xml";
+    static String PATH_NAME_FOR_FILTERED_PEOPLE = "C:\\Users\\Valeriia_Voinalovych\\IdeaProjects\\xmlParsers2\\peopleWCashUpper10000.xml";*/
 
-    static String PATH_NAME_FOR_FILTERED_PEOPLE = "/Users/zephyrkina/IdeaProjects/XmlParsers/peopleWCashUpper10000.xml";
-    static String PATH_NAME_FOR_FILTERED_PEOPLE2 = "/Users/zephyrkina/IdeaProjects/XmlParsers/people2WCashUpper10000.xml";
-
-    static String PATH_NAME_FOR_FILTERED_CURRENCIES = "/Users/zephyrkina/IdeaProjects/XmlParsers/currencies.txt";
+    private static final String PATH_NAME_FOR_PEOPLE = "/Users/zephyrkina/IdeaProjects/XmlParsers/src/main/resources/people.xml";
+    private static final String PATH_NAME_FOR_FILTERED_PEOPLE = "/Users/zephyrkina/IdeaProjects/XmlParsers/src/main/resources/peopleWCashUpper10000.xmll";
+    private static final String PATH_NAME_FOR_FILTERED_CURRENCIES = "/Users/zephyrkina/IdeaProjects/XmlParsers/src/main/resources/currencies.txt";
+    private static final String jsonUrl = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
 
     public static void main(String[] args) {
 
+        //XML
 
+        CreateXmlFile createXmlFile = new CreateXmlFile();
+        XMLParser<Person> domParser = new DomParser();
+        XMLParser<Person> StAxParser = new StAXParser();
 
-       /* CreateXmlFile createXmlFile = new CreateXmlFile();
-        PersonUtil personUtil = new PersonUtil();
-        Parser<Person> domParser = new DomParser();
-        Parser<Person> StAxParcer = new StAXParser();
+        List<Person> personList = new ArrayList<>();
 
+        Person person1 = new Person("1", "Anna", "ddd", 99834, "gfdsdfg");
+        Person person2 = new Person("2", "Anna2", "ddddd", 1254, "gfdsdfg");
+        Person person3 = new Person("3", "Anna3", "dd", 79934, "gfdsdfg");
+        personList.add(person1);
+        personList.add(person2);
+        personList.add(person3);
 
+        createXmlFile.createXmlFromObjectsList(personList, PATH_NAME_FOR_PEOPLE, true);
 
-        createXmlFile.create(PATH_NAME_FOR_PEOPLE);
-
-        System.out.println("Dom parser:");
-        domParser.parseToConsole(PATH_NAME_FOR_PEOPLE);
-        System.out.println();
-        System.out.println("Stax parser");
-        StAxParcer.parseToConsole(PATH_NAME_FOR_PEOPLE);
-        System.out.println();
         List<Person> people = domParser.parseToCollection(PATH_NAME_FOR_PEOPLE);
-        List<Person> p2 = StAxParcer.parseToCollection(PATH_NAME_FOR_PEOPLE);
+        List<Person> p2 = StAxParser.parseToCollection(PATH_NAME_FOR_PEOPLE);
 
-        personUtil.writeToConsole(p2);
-        System.out.println();
+        PersonUtil.writeToConsole(p2);
 
-        List<Person> filteredPeople = personUtil.filterByCash(10000, people);
-        personUtil.writeToConsole(filteredPeople);
+        List<Person> filteredPeople = PersonUtil.filterByCash(10000, people);
+        PersonUtil.writeToConsole(filteredPeople);
 
-        createXmlFile.createXmlFromObjectsList(filteredPeople, PATH_NAME_FOR_FILTERED_PEOPLE);
-*/
+        createXmlFile.createXmlFromObjectsList(filteredPeople, PATH_NAME_FOR_FILTERED_PEOPLE, false);
 
 
-       CurrencyUtil currencyUtil = new CurrencyUtil();
+        //JSON
+
+        JSONToStringParser jsonToStringParser = new JSONToStringParser();
         GSONParser gsonParser = new GSONParser();
-        //gsonParser.parseToConsole();
+        String message = jsonToStringParser.readStringFromJson(jsonUrl);
 
-        List<Currency> currencyList = gsonParser.parseToCollection();
+        List<Currency> currencyList = gsonParser.parseToCollection(message);
 
+        CurrencyUtil.writeToConsole(currencyList);
 
-        currencyList.forEach(currency -> System.out.println(currency));
+        List<Currency> filteredCurrency = CurrencyUtil.extractActualCurrency(currencyList);
 
-        List<Currency> filterefCurrency = currencyUtil.extractActualCurrency(currencyList);
-        System.out.println();
-        filterefCurrency.forEach(currency -> System.out.println(currency));
+        CurrencyUtil.writeToConsole(filteredCurrency);
 
-        currencyUtil.writeToFile(filterefCurrency, PATH_NAME_FOR_FILTERED_CURRENCIES);
+        CurrencyUtil.writeToFile(filteredCurrency, PATH_NAME_FOR_FILTERED_CURRENCIES);
 
-        currencyUtil.readFromFileToConsole(PATH_NAME_FOR_FILTERED_CURRENCIES);
+        CurrencyUtil.readFromFileToConsole(PATH_NAME_FOR_FILTERED_CURRENCIES);
     }
 }

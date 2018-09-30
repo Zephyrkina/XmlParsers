@@ -1,4 +1,4 @@
-package ua.training.xml;
+package ua.training.entity;
 
 import java.util.Objects;
 

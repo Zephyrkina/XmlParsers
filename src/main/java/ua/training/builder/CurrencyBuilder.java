@@ -1,4 +1,6 @@
-package ua.training.json;
+package ua.training.builder;
+
+import ua.training.entity.Currency;
 
 public class CurrencyBuilder {
     private String r030;

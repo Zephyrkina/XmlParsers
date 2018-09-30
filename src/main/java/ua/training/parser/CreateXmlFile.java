@@ -1,8 +1,9 @@
-package ua.training.xml;
+package ua.training.parser;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import ua.training.entity.Person;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class CreateXmlFile {
 
-    public void createXmlFromObjectsList(List<Person> people, String outputFilePath) {
+    public void createXmlFromObjectsList(List<Person> people, String outputFilePath, boolean withAllProperties) {
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = dbFactory.newDocumentBuilder();
@@ -31,7 +32,12 @@ public class CreateXmlFile {
             rootElement.appendChild(notebook);
 
             for (Person person : people) {
-                notebook.appendChild(getFileredPerson(document, person.getName(), person.getAddress(), String.valueOf(person.getCash())));
+                if (withAllProperties) {
+                    notebook.appendChild(getPerson(document, person.getId(), person.getName(), person.getAddress(), String.valueOf(person.getCash()), person.getEducation()));
+                } else {
+                    notebook.appendChild(getFilteredPerson(document, person.getName(), person.getAddress(), String.valueOf(person.getCash())));
+
+                }
             }
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -40,43 +46,6 @@ public class CreateXmlFile {
             StreamResult result = new StreamResult(new File(outputFilePath));
             transformer.transform(source, result);
 
-        /*    StreamResult consoleResult = new StreamResult(System.out);
-            transformer.transform(source, consoleResult);*/
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void create(String outputFilePath) {
-        try {
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = dbFactory.newDocumentBuilder();
-            Document document = documentBuilder.newDocument();
-
-            Element rootElement = document.createElement("catalog");
-            document.appendChild(rootElement);
-
-            Element notebook = document.createElement("notebook");
-            rootElement.appendChild(notebook);
-
-            notebook.appendChild(getPerson(document, "1", "John", "eddrtf", "99999", "sa"));
-            notebook.appendChild(getPerson(document, "2", "AAaa", "edtydrtf", "99999", "sat"));
-            notebook.appendChild(getPerson(document, "3", "BBbb", "eddrttf", "2222", "satr"));
-
-
-
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(document);
-            StreamResult result = new StreamResult(new File(outputFilePath));
-            transformer.transform(source, result);
-/*
-            StreamResult consoleResult = new StreamResult(System.out);
-            transformer.transform(source, consoleResult);*/
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -85,7 +54,6 @@ public class CreateXmlFile {
         } catch (TransformerException e) {
             e.printStackTrace();
         }
-
     }
 
     private Node getPerson(Document document, String id, String name, String address, String cash, String education) {
@@ -98,7 +66,7 @@ public class CreateXmlFile {
         return person;
     }
 
-    private Node getFileredPerson(Document document, String name, String address, String cash) {
+    private Node getFilteredPerson(Document document, String name, String address, String cash) {
         Element person = document.createElement("person");
         person.appendChild(getPersonElements(document, person, "name", name));
         person.appendChild(getPersonElements(document, person, "address", address));

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog>
+    <notebook>
+        <person>
+            <name>John</name>
+            <address>eddrtf</address>
+            <cash>99999</cash>
+        </person>
+        <person>
+            <name>AAaa</name>
+            <address>edtydrtf</address>
+            <cash>99999</cash>
+        </person>
+    </notebook>
+</catalog>

@@ -1,13 +1,13 @@
-package ua.training.json;
+package ua.training.entity;
 
 import java.util.Objects;
 
 public class Currency {
-    String r030;
-    String txt;
-    String rate;
-    String cc;
-    String exchangedate;
+    private String r030;
+    private String txt;
+    private String rate;
+    private String cc;
+    private String exchangedate;
 
 
 

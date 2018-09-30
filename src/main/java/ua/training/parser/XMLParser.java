@@ -1,9 +1,8 @@
-package ua.training.xml;
+package ua.training.parser;
 
 import java.io.File;
 import java.util.List;
 
-public interface Parser<T> {
-    public void parseToConsole(String inputFilePath);
+public interface XMLParser<T> {
     public List<T> parseToCollection(String inputFilePath);
 }

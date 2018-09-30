@@ -3,20 +3,22 @@ package ua.training.xml;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ua.training.entity.Person;
+import ua.training.parser.CreateXmlFile;
+import ua.training.parser.DomParser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class DomParserTest {
-    DomParser domParser;
-    CreateXmlFile createXmlFile;
-    List<Person> personList = new ArrayList<>();
-    String path = "/Users/zephyrkina/IdeaProjects/XmlParsers/test.xml";
+    private DomParser domParser;
+    private List<Person> personList;
+    private static final String path = "/Users/zephyrkina/IdeaProjects/XmlParsers/src/test/resources/test.xml";
 
     @Before
     public void setup() {
+        personList = new ArrayList<>();
+
         Person person1 = new Person("5", "Anna", "ddd", 1234, "gfdsdfg");
         Person person2 = new Person("6", "Anna2", "ddddd", 12554, "gfdsdfg");
         Person person3 = new Person("7", "Anna3", "dd", 7234, "gfdsdfg");
@@ -24,13 +26,13 @@ public class DomParserTest {
         personList.add(person2);
         personList.add(person3);
 
-        createXmlFile = new CreateXmlFile();
-        createXmlFile.createXmlFromObjectsList(personList, path);
+        CreateXmlFile createXmlFile = new CreateXmlFile();
+        createXmlFile.createXmlFromObjectsList(personList, path, true);
         domParser = new DomParser();
     }
 
     @Test
-    public void testDomParcer() {
+    public void testDomParser() {
         List<Person> parsedPeople = domParser.parseToCollection(path);
         Assert.assertEquals(parsedPeople.size(), personList.size());
         for(int i = 0; i < parsedPeople.size(); i++) {

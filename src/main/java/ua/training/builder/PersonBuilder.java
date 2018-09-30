@@ -1,4 +1,6 @@
-package ua.training.xml;
+package ua.training.builder;
+
+import ua.training.entity.Person;
 
 public class PersonBuilder {
     private String id;
