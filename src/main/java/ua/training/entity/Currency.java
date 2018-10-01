@@ -62,12 +62,12 @@ public class Currency {
 
     @Override
     public String toString() {
-        return "Currency{" +
-                "r030='" + r030 + '\'' +
-                ", txt='" + txt + '\'' +
-                ", rate='" + rate + '\'' +
-                ", cc='" + cc + '\'' +
-                ", exchangedate='" + exchangedate + '\'' +
-                '}';
+        return "{" + '\n' +
+                "\"r030\":\"" + r030 +
+                "\",\"txt\":\"" + txt +
+                "\",\"rate\":\"" + rate +
+                "\",\"cc\":\"" + cc +
+                "\",\"exchangedate\":\"" + exchangedate +
+                '\"'+ '\n' + '}';
     }
 }

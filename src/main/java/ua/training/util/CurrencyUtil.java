@@ -20,10 +20,12 @@ public class CurrencyUtil {
 
     public static void writeToFile(List<Currency> currencies, String outputFilePath) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(outputFilePath)))) {
+            writer.write('[');
             for (Currency currency : currencies) {
                 writer.write(currency.toString());
-                writer.write("\n");
+                writer.write(',');
             }
+            writer.write(']');
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,9 +44,12 @@ public class CurrencyUtil {
     }
 
     public static void writeToConsole(List<Currency> currencies) {
+        System.out.println('[');
         for (Currency currency : currencies) {
-            System.out.println(currency.toString());
+            System.out.print(currency.toString());
+            System.out.println(',');
         }
+        System.out.println(']');
     }
 
 }

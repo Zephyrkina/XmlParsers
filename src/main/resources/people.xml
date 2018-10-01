@@ -1,1 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><catalog><notebook><person id="1"><name>Anna</name><address>ddd</address><cash>99834</cash><education>gfdsdfg</education></person><person id="2"><name>Anna2</name><address>ddddd</address><cash>1254</cash><education>gfdsdfg</education></person><person id="3"><name>Anna3</name><address>dd</address><cash>79934</cash><education>gfdsdfg</education></person></notebook></catalog>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog>
+    <notebook>
+        <person id="1">
+            <name>Anna</name>
+            <address>ddd</address>
+            <cash>99834</cash>
+            <education>gfdsdfg</education>
+        </person>
+        <person id="2">
+            <name>Anna2</name>
+            <address>ddddd</address>
+            <cash>1254</cash>
+            <education>gfdsdfg</education>
+        </person>
+        <person id="3">
+            <name>Anna3</name>
+            <address>dd</address>
+            <cash>79934</cash>
+            <education>gfdsdfg</education>
+        </person>
+    </notebook>
+</catalog>

@@ -11,13 +11,17 @@ import java.util.List;
 
 public class Main {
 
-    /* static String PATH_NAME_FOR_PEOPLE = "C:\\Users\\Valeriia_Voinalovych\\IdeaProjects\\xmlParsers2\\people.xml";
-    static String PATH_NAME_FOR_FILTERED_PEOPLE = "C:\\Users\\Valeriia_Voinalovych\\IdeaProjects\\xmlParsers2\\peopleWCashUpper10000.xml";*/
+    private static final String PATH_NAME_FOR_PEOPLE = "C:\\Users\\Valeriia_Voinalovych\\IdeaProjects\\xmlParsers2\\src\\main\\resources\\people.xml";
+    private static final String PATH_NAME_FOR_FILTERED_PEOPLE = "C:\\Users\\Valeriia_Voinalovych\\IdeaProjects\\xmlParsers2\\src\\main\\resources\\peopleWCashUpper10000.xml";
 
-    private static final String PATH_NAME_FOR_PEOPLE = "/Users/zephyrkina/IdeaProjects/XmlParsers/src/main/resources/people.xml";
-    private static final String PATH_NAME_FOR_FILTERED_PEOPLE = "/Users/zephyrkina/IdeaProjects/XmlParsers/src/main/resources/peopleWCashUpper10000.xmll";
-    private static final String PATH_NAME_FOR_FILTERED_CURRENCIES = "/Users/zephyrkina/IdeaProjects/XmlParsers/src/main/resources/currencies.txt";
+    private static final String PATH_NAME_FOR_FILTERED_CURRENCIES = "C:\\Users\\Valeriia_Voinalovych\\IdeaProjects\\xmlParsers2\\src\\main\\resources\\currencies.txt";
     private static final String jsonUrl = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
+
+
+  /*  private static final String PATH_NAME_FOR_PEOPLE = "/Users/zephyrkina/IdeaProjects/XmlParsers/src/main/resources/people.xml";
+    private static final String PATH_NAME_FOR_FILTERED_PEOPLE = "/Users/zephyrkina/IdeaProjects/XmlParsers/src/main/resources/peopleWCashUpper10000.xml";
+    private static final String PATH_NAME_FOR_FILTERED_CURRENCIES = "/Users/zephyrkina/IdeaProjects/XmlParsers/src/main/resources/currencies.txt";
+    private static final String jsonUrl = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";*/
 
     public static void main(String[] args) {
 

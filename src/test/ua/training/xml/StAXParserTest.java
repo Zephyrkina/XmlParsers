@@ -2,6 +2,7 @@ package ua.training.xml;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import ua.training.entity.Person;
 import ua.training.parser.CreateXmlFile;
@@ -11,12 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StAXParserTest {
-    private StAXParser stAXParser;
-    private List<Person> personList;
-    private static final String path = "/Users/zephyrkina/IdeaProjects/XmlParsers/src/test/resources/testStax.xml";
+    private static StAXParser stAXParser;
+    private static List<Person> personList;
+    private static List<Person> parsedPeople;
+    private static final String path = "C:\\Users\\Valeriia_Voinalovych\\IdeaProjects\\xmlParsers2\\src\\test\\resources\\testStax.xml";
 
-    @Before
-    public void setup() {
+/*
+    private static final String path = "/Users/zephyrkina/IdeaProjects/XmlParsers/src/test/resources/testStax.xml";
+*/
+
+    @BeforeClass
+    public static void setUp() {
+        parsedPeople = new ArrayList<>();
         personList = new ArrayList<>();
 
         Person person1 = new Person("5", "Anna", "ddd", 1234, "gfdsdfg");
@@ -32,9 +39,13 @@ public class StAXParserTest {
     }
 
     @Test
-    public void testDomParser() {
-        List<Person> parsedPeople = stAXParser.parseToCollection(path);
+    public void testIfParsedPeopleListSizeEqualsToActualPeopleList() {
+        parsedPeople = stAXParser.parseToCollection(path);
         Assert.assertEquals(parsedPeople.size(), personList.size());
+    }
+
+    @Test
+    public void testIfParsedObjectsAreEqualToActualObjects() {
         for(int i = 0; i < parsedPeople.size(); i++) {
             Assert.assertEquals(parsedPeople.get(i), personList.get(i));
         }
